@@ -18,7 +18,7 @@ $ npm start
 ![yellowLine](client/assets/images/yellowLine.png)
 ### Index    
 **001.warp browser ver 0.0.1**  
-Control arduino and roomba. 
+Control arduino and roomba.   
 Local demo : http://localhost:PORT/001.warp-browser/
 
 

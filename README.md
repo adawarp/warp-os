@@ -13,6 +13,7 @@ $ cd path
 $ npm install
 $ npm start
 ```
+※WARNING : You have to connect arduino first and roomba serial cable.  
 
 ![yellowLine](client/assets/images/yellowLine.png)
 ### Index    

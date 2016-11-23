@@ -7,7 +7,6 @@ const fs = require("fs");
 const debug = require("debug")("create2:driver");
 const Repl = require("repl");
 
-//http server
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);

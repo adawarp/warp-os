@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="../favicon.ico" />
+<!--<script src="/socket.io/socket.io.js"></script>-->
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="https://unpkg.com/adawarp@latest/dist/adawarp.js"></script>
+<script src="main.js"></script>
+
+<style>
+button{
+  background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+  <h1>002.webrtc-led-status</h1>
+  <hr>
+  <!--call button-->
+  <div>
+      <input type="text" placeholder="Input partner ID" id="partner-id-input">
+      <button onclick="callStart()">Start Call</button>
+      <button id="call_end" onclick="callEnd()">End Call</button>
+  </div>
+  <!--Display both ID-->
+  <div>
+      <p>MyID: <span id="my_id">-</span></p>
+      <p>PartnerID: <span id="partner_id">-</span></p>
+  </div>
+
+  <div id="receive_message">....</div>
+
+  <button id='on_btn' onclick='ledStatus(true)'>LedOn</button>
+  <button id='off_btn' onclick='ledStatus(false)'>LedOff</button>
+  <hr>
+</body>
+</html>

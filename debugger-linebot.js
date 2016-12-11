@@ -33,8 +33,8 @@ server.start(app, http, PORT);
 
 io.sockets.on('connection', function(socket) {
   console.log("hello socket");
-  socket.on('ledStatus', function(status) {
-    console.log('Led status is : ' + status);
+  socket.on('command', function(command) {
+    console.log('Command : ' + command);
     //socket.broadcast.emit('ledStatus', status);
   });
 });

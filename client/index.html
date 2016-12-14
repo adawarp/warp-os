@@ -3,31 +3,36 @@
   <HEAD>
     <TITLE>warp browser</TITLE>
     <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" >
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="https://unpkg.com/adawarp@latest/dist/adawarp.js"></script>
     <script src="js/main.js"></script>
   </HEAD>
-  <style>
-  button{
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-  </style>
 <BODY>
   <img src="assets/images/yellowLine.png" width="100%"/>
   <H1>warp-os-mac</H1>
   <hr>
-  <button id='on_btn' onclick='ledStatus("on")'>LedOn</button>
+  <button id='on_btn' onclick='ledStatus("on")' class="button1">LedOn</button>
   <button id='blink_btn' onclick='ledStatus("blink")'>LedBlink</button>
   <button id='off_btn' onclick='ledStatus("off")'>LedOff</button>
+  <div>
+    <label for="fader">servo_yaw</label>
+    <input type="range" min="30" max="150" value="90" id="fader" 
+      step="1" oninput="outputUpdate({servo : 'servo_yaw', vol : value})">
+    <output for="fader" id="yaw">90</output>
+  </div>
+  <div>
+    <label for="fader">servo_right</label>
+    <input type="range" min="30" max="150" value="90" id="fader" 
+      step="1" oninput="outputUpdate({servo : 'servo_right', vol : value})">
+    <output for="fader" id="right">90</output>
+  </div>
+  <div>
+    <label for="fader">servo_left</label>
+    <input type="range" min="30" max="150" value="90" id="fader" 
+      step="1" oninput="outputUpdate({servo : 'servo_left', vol : value})">
+    <output for="fader" id="left">90</output>
+  </div>
   <hr>
   <img src="assets/images/adawarp-logo-300.png" style="width : 50px">
 </BODY>

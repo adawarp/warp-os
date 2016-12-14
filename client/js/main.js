@@ -5,7 +5,7 @@ var conn;
 window.onload = function(){
   socket = io.connect();
   peer.on('open', function(){
-    document.getElementById("my_id").innerHTML = peer.id;
+    //document.getElementById("my_id").innerHTML = peer.id;
   });
   peer.login();
   ledStatus(false);
@@ -50,4 +50,16 @@ function colorSwitcher (status) {
     blink_btn.style.backgroundColor = '#4CAF50';
     off_btn.style.backgroundColor = 'red';
   }
+}
+
+function outputUpdate(data) {
+  if (data.servo == 'servo_yaw') {
+    document.querySelector('#yaw').value = data.vol;
+  } else if (data.servo == 'servo_right') {
+    document.querySelector('#right').value = data.vol;
+  } else if (data.servo == 'servo_left') {
+    document.querySelector('#left').value = data.vol;
+  }
+  socket.emit('servo', data);
+  console.log(data.servo + ":" + data.vol);
 }

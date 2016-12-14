@@ -2,11 +2,6 @@
 
 class BoardManager {
 
-  constructor(io) {
-    //this.ledStatus = false;
-    this.io = io;
-  }
-
   changeLedStatus(ledStatus) {
     this.ledStatus = ledStatus;
     this.io.sockets.emit('ledStatus', this.ledStatus);
@@ -25,6 +20,10 @@ class BoardManager {
       console.log('turn off led');
       led.stop().off();
     }
+  }
+  servoMove(servo, deg){
+    console.log(servo.id + ':' + deg);
+    if (deg !== null && deg !== undefined) servo.to(deg);
   }
 }
 

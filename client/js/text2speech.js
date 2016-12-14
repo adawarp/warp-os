@@ -13,15 +13,21 @@ function talk(data) {
   msg.lang = 'ja-JP'; //言語
 
   msg.onstart = function(){
-  console.log('hello start');
-  document.getElementById(data.id).disabled = "disabled";
-  document.getElementsByClassName("questionee").disabled = "disabled";
+    console.log('hello start');
+    document.getElementById(data.id).disabled = "disabled";
+    var list = document.querySelectorAll( 'button' );
+    for (var item of list) {
+      console.log(item);
+      item.disabled = "disabled";
+    }
   }
   msg.onend = function(){
     console.log('hello fin');
     document.getElementById(data.id).disabled = "";
-    document.getElementsByClassName("questionee").disabled = "";
-
+    var list = document.querySelectorAll( 'button' );
+    for (var item of list) {
+      item.disabled = "";
+    }
   }
   window.speechSynthesis.speak(msg);
   socket.emit('speech', data.id);

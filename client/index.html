@@ -1,21 +1,33 @@
 <!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <HTML>
-   <HEAD>
-      <TITLE>warp browser</TITLE>
-      <link rel="icon" type="image/png" href="favicon.ico" />
-   </HEAD>
+  <HEAD>
+    <TITLE>warp browser</TITLE>
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://unpkg.com/adawarp@latest/dist/adawarp.js"></script>
+    <script src="js/main.js"></script>
+  </HEAD>
+  <style>
+  button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  </style>
 <BODY>
   <img src="assets/images/yellowLine.png" width="100%"/>
-
   <H1>warp-os-mac</H1>
-  <!--<P><a href="001.warp-browser">warp browser ver 0.0.1</a></P>
-  <hr>-->
-  <P><a href="001-warpos-dm2d2">001-warpos-dm2d2</a></P>
-  <P><a href="002-warpos-decot">002-warpos-decot</a></P>
-  <P><a href="003-decot-analogpad">003-decot-analogpad</a></P>
-  <P><a href="004-linebot-ledblink">004-linebot-ledblink</a></P>
-  <P><a href="005-linebot-bear">005-linebot-bear</a></P>
-  
+  <hr>
+  <button id='on_btn' onclick='ledStatus("on")'>LedOn</button>
+  <button id='blink_btn' onclick='ledStatus("blink")'>LedBlink</button>
+  <button id='off_btn' onclick='ledStatus("off")'>LedOff</button>
   <hr>
   <img src="assets/images/adawarp-logo-300.png" style="width : 50px">
 </BODY>

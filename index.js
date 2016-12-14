@@ -1,31 +1,34 @@
 "use strict";
 const PORT = 4222;
 
-//to control iRobot create2
-const SerialPort = require("serialport");
-const fs = require("fs");
-const debug = require("debug")("create2:driver");
-const Repl = require("repl");
+//iRobot create2 modules
+const SerialPort = require('serialport');
+const fs = require('fs');
+const debug = require('debug')('create2:driver');
+const Repl = require('repl');
 
+//Server settings
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const server = require("./server");
 app.use(express.static(__dirname + '/client'));
 
-server.start(app, http, PORT);
+http.listen(PORT, function(){
+  console.log('Listen on ',PORT);
+});
 
-//johnny-five
+//Johnny-Five
 let five = require('johnny-five');
-let board = new five.Board({"repl":false});
-//let board = new five.Board({ port: "/dev/tty.usbmodem1411" }, {"repl":false});
+let board = new five.Board({'repl':false});
 
 let servo_yaw = 90;
 let led = null;
+const BoardManager = require('./server/BoardManager.js');
+const boardManager = new BoardManager(io);
 
-board.on("ready", function() {
-  console.log("hello board");
+board.on('ready', function() {
+  console.log('hello board');
   led = new five.Led(13);
   led.off();
   servo_yaw = new five.Servo({
@@ -36,22 +39,14 @@ board.on("ready", function() {
 });
 
 io.sockets.on('connection', function(socket) {
-  console.log("hello socket");
+  console.log('hello socket');
 	socket.on('ledStatus', function(status) {
-		if (status) {
-			console.log("Led on!!!");
-			led.on();
-		} else {
-			console.log("Led off...");
-			led.stop().off();
-		}
+    console.log(status)
+    boardManager.ledStatus(led, status);
 	});
-	socket.on('servo', function(deg) {
+	/*socket.on('servo', function(deg) {
 		//console.log(deg.left.vertical);
     //console.log(deg[0]);
 		if (deg[0] !== null && deg[0] !== undefined) servo_yaw.to(180 - deg[0]);
-	})
+	})*/
 });
-
-const roombaController = require("./roombaController.js");
-roombaController.start(io, fs, debug);

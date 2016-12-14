@@ -66,4 +66,7 @@ io.sockets.on('connection', function(socket) {
       boardManager.servoMove(servo_left, data.vol);
     }
   });
+  socket.on('speech', function(data) {
+    console.log(data);
+  })
 });

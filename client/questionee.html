@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+  <HEAD>
+    <TITLE>warp browser</TITLE>
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" >
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://unpkg.com/adawarp@latest/dist/adawarp.js"></script>
+    <!--<script src="js/main.js"></script>-->
+    <script src="js/text2speech.js"></script>
+
+  </HEAD>
+<BODY>
+  <img src="assets/images/yellowLine.png" width="100%"/>
+  <H1>しつもんにこたえるよ！</H1>
+  <hr>
+  <button id="name" class="questionee" onclick='talk({id : "name", script : "ぼくの、なまえは、はこ、といいます。"})'>ロボットの名前は？</button>
+  <button id="what" class="questionee" onclick='talk({id : "what", script : "わたしは、うたったり、おどったりすることができます。"})'>君は何が出来るの？</button>
+  <button id="who" class="questionee" onclick='talk({id : "who", script : "この、はあどうぇあは、よき、という会社が、そふとうえあは、あだわあぷというかいしゃが、作っています。"})'>誰が作っているの？</button>
+  <hr>
+  <button id="how-much" class="questionee" onclick='talk({id : "how-much", script : "ぼくは、ぷらいすれす、です-。うそです。ひやくまんえんです。どうじょう、するなら、かねをくれ。"})'>君はいくら？</button>
+  <button id="business" class="questionee" onclick='talk({id : "business", script : "ぼくは、おおぷんそおすです。だから、みんなつかってー。"})'>ビジネスモデルは？</button>
+  <button id="rich" class="questionee" onclick='talk({id : "rich", script : "もうかっていたら、こんなところにはいないです。"})'>儲かるの？</button>
+  <hr>
+  <button id="danbo" class="questionee" onclick='talk({id : "danbo", script : "かれは、だんぼおるです。ぼくは、ろぼっとです。おおちがいです。"})'>ダ◉ボーに似てない？</button>
+  <button id="touch" class="questionee" onclick='talk({id : "touch", script : "どんと、たっち、みい！どんと、たっち、みいー！"})'>さわってもいい？</button>
+  <button id="weather" class="questionee" onclick='talk({id : "weather", script : "それぐらい、ぼくに、たよらないで、じぶんで、ぐぐったら、どうですか。"})'>今日の天気は？</button>
+
+  <hr>
+  <img src="assets/images/adawarp-logo-300.png" style="width : 200px">
+</BODY>
+</HTML>

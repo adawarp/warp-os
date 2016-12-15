@@ -134,7 +134,14 @@ io.sockets.on('connection', function(socket) {
       board.wait(4000, function() {
         servoAction(10, 90, 80, 1000);
       });
-    } else if (command == 'document') {
+    } else if (command == 'amazing') {
+      console.log("command amazing");
+      servoAction(30, 90, 90, 1000);
+      move4();
+      board.wait(3000, function() {
+        servoAction(90, 70, 80, 1000);
+      });
+    }  else if (command == 'document') {
       console.log("command document");
       servoAction(30, 90, 90, 1000);
       move1();

@@ -73,7 +73,15 @@ io.sockets.on('connection', function(socket) {
     if (command == 'name') {
       servoAction(90, 10, 50, 1000);
       move0();
-    } else if (command == 'what') {
+    } else if (command == 'morning') {
+      console.log("command morning");
+      servoAction(80, 70, 50, 1000);
+      move2();
+      board.wait(3000, function() {
+        servoAction(120, 70, 80, 1000);
+      });
+    }
+     else if (command == 'what') {
       console.log("command what");
       servoAction(80, 70, 50, 1000);
       move1();

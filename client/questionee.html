@@ -6,32 +6,15 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" >
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="https://unpkg.com/adawarp@latest/dist/adawarp.js"></script>
-    <!--<script src="js/main.js"></script>-->
+    <script src="js/phrases.js"></script>
+
     <script src="js/text2speech.js"></script>
 
   </HEAD>
 <BODY>
   <img src="assets/images/yellowLine.png" width="100%"/>
   <H1>しつもんにこたえるよ！</H1>
-  <hr>
-  <button id="morning" class="questionee" onclick='talk({id : "morning", script : "おはよう、ございます。今日も、はりきっていきましょう。"})'>おはようございます。</button>
-  <hr>
-  <button id="name" class="questionee" onclick='talk({id : "name", script : "ぼくの、なまえは、はこ、といいます。"})'>ロボットの名前は？</button>
-  <button id="what" class="questionee" onclick='talk({id : "what", script : "わたしは、うたったり、おどったりすることができます。"})'>君は何が出来るの？</button>
-  <button id="who" class="questionee" onclick='talk({id : "who", script : "よき、という会社が、はあどうえあを、作っています。"})'>誰が作っているの？</button>
-  <hr>
-  <button id="how-much" class="questionee" onclick='talk({id : "how-much", script : "ぼくは、ぷらいすれす、です-。"})'>君はいくら？</button>
-  <button id="business" class="questionee" onclick='talk({id : "business", script : "ぼくは、おおぷんそおすです。だから、みんなつかってー。"})'>ビジネスモデルは？</button>
-  <button id="rich" class="questionee" onclick='talk({id : "rich", script : "もうかっていたら、こんなところにはいないです。"})'>儲かるの？</button>
-  <hr>
-  <button id="danbo" class="questionee" onclick='talk({id : "danbo", script : "かれは、だんぼおるです。ぼくは、ろぼっとです。おおちがいです。"})'>ダ◉ボーに似てない？</button>
-  <button id="touch" class="questionee" onclick='talk({id : "touch", script : "どんと、たっち、みい！どんと、たっち、みいー！"})'>さわってもいい？</button>
-  <button id="weather" class="questionee" onclick='talk({id : "weather", script : "それぐらい、ぼくに、たよらないで、じぶんで、ぐぐったら、どうですか。"})'>今日の天気は？</button>
-  <hr>
-  <button id="amazing" class="questionee" onclick='talk({id : "amazing", script : "わたしは、じゃば、すくりぷと、で、うごいています。"})'>なにが、すごいの？</button>
-  <button id="document" class="questionee" onclick='talk({id : "document", script : "あだわあぷ、どっとこむ、か、この、ふらいやあを、ごらんください。"})'>資料はある？</button>
-  <button id="noperson" class="questionee" onclick='talk({id : "noperson", script : "めいしが、めのまえに、あります。ごれんらく、おまちしております。"})'>担当者がいなくなったら？</button>
-
+  <div id="question-list"></div>
   <hr>
   <img src="assets/images/adawarp-logo-300.png" style="width : 200px">
 </BODY>

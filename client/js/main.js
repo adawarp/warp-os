@@ -11,6 +11,8 @@ window.onload = function(){
   ledStatus(false);
 };
 
+
+
 peer.on('connection', function(conn) {
   document.getElementById("partner_id").innerHTML = conn.peer;
   conn.on('data', function(data){

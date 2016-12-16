@@ -18,8 +18,12 @@ http.listen(PORT, function(){
 //Johnny-Five
 
 const BoardManager = require('./server/BoardManager.js');
-const board = new BoardManager(io);
+const board = new BoardManager();
 
+board.on('ledStatusChanged', (status) => {
+  debug('ledStatusChanged Event', status);
+  io.sockets.emit('ledStatus', this.ledStatus);
+});
 //--HACK: This is fucking code. need refactoring ASAP!!!
 io.sockets.on('connection', (socket) => {
   debug('client connected');

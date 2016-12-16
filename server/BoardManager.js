@@ -2,11 +2,12 @@
 const five = require('johnny-five');
 const board = new five.Board({'repl':false});
 const debug = require('debug')('warp:board');
+const EventEmitter = require('events');
 
-class BoardManager {
+class BoardManager extends EventEmitter {
 
-  constructor(io) {
-    this.io = io;
+  constructor() {
+    super();
     this.servos = {};
     this.led = null;
     this.isActive = false;
@@ -36,9 +37,9 @@ class BoardManager {
 
   changeLedStatus(status) {
     debug(`change LED status: ${status}`);
-    if(!this.isActive) return;
-    this.io.sockets.emit('ledStatus', this.ledStatus);
     this.status = status;
+    this.emit('ledStatusChanged', status);
+    if(!this.isActive) return;
     if(status == 'on') {
       this.led.on();
     } else if (status == 'blink') {

@@ -1,26 +1,29 @@
 /* global Phrases: false, io: false */
 var socket = io();
-var lng_now = 'ja';
+var currentLang = 'ja';
 
 window.onload = function(){
   socket = io.connect();
-  initQuestionList(PhrasesJa);
+  initQuestionList(langCode.ja.dict);
 };
 
 window.onbeforeunload = function() {
   window.speechSynthesis.cancel();
 };
 
-var phrase_list = {
-  ja : PhrasesJa,
-  en : PhrasesEn,
-  cn : PhrasesCn
-}
-
-var lng_code = {
-  ja : 'ja-JP',
-  en : 'en-US',
-  cn : 'zh-CN'
+var langCode = {
+  ja : {
+    dict: PhrasesJa,
+    code: 'ja-JP'
+  },
+  en : {
+    dict: PhrasesEn,
+    code: 'en-US'
+  },
+  cn : {
+    dict: PhrasesCn,
+    code: 'zh-CN'
+  }
 }
 
 function initQuestionList(Phrases) {
@@ -31,12 +34,12 @@ function initQuestionList(Phrases) {
   }
 }
 
-function sellng() {
+function sellang() {
   window.speechSynthesis.cancel();
-  pullSellect = document.pullForm.language.selectedIndex;
-  lng = document.pullForm.language.options[pullSellect].value;
-  initQuestionList(phrase_list[lng]);
-  lng_now = lng;
+  var pullSellect = document.pullForm.language.selectedIndex;
+  var lang = document.pullForm.language.options[pullSellect].value;
+  initQuestionList(langCode[lang].dict);
+  currentLang = lang;
 }
 
 function buildQuestionButton(phrases, key) {
@@ -57,10 +60,9 @@ function talk(data) {
   msg.rate = 0.9;  //レート
   msg.pitch = 1; //ピッチ
   msg.text = data.script;
-  msg.lang = lng_code[lng_now]; //言語
+  msg.lang = langCode[currentLang].code; //言語
 
   msg.onstart = function(){
-    console.log('start');
     document.getElementById(data.id).disabled = 'disabled';
     var list = document.querySelectorAll( 'button' );
     for (var item of list) {
@@ -69,7 +71,6 @@ function talk(data) {
   };
   //---todo:FireFox specific code
   msg.onend = function(){
-    console.log('end');
     document.getElementById(data.id).disabled = '';
     var list = document.querySelectorAll( 'button' );
     for (var item of list) {

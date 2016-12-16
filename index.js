@@ -1,7 +1,5 @@
 'use strict';
 const PORT = 4222;
-
-const fs = require('fs');
 const debug = require('debug')('warp:conductor');
 
 //Server settings
@@ -24,6 +22,7 @@ board.on('ledStatusChanged', (status) => {
   debug('ledStatusChanged Event', status);
   io.sockets.emit('ledStatus', this.ledStatus);
 });
+
 //--HACK: This is fucking code. need refactoring ASAP!!!
 io.sockets.on('connection', (socket) => {
   debug('client connected');

@@ -7,19 +7,19 @@ window.onload = function(){
 };
 
 function initQuestionList() {
-  var rootElement = document.getElementById("question-list");
+  var rootElement = document.getElementById('question-list');
   for (var key in Phrases) {
     rootElement.appendChild(buildQuestionButton(Phrases, key));
   }
 }
 
 function buildQuestionButton(phrases, key) {
-  var button = document.createElement("button");
+  var button = document.createElement('button');
   button.id = key;
-  button.class = "questionee";
+  button.class = 'questionee';
   button.onclick = function() {
     talk({id: key, script: Phrases[key].answer});
-  }
+  };
   button.textContent = Phrases[key].question;
   return button;
 }
@@ -35,21 +35,21 @@ function talk(data) {
 
   msg.onstart = function(){
     console.log('hello start');
-    document.getElementById(data.id).disabled = "disabled";
+    document.getElementById(data.id).disabled = 'disabled';
     var list = document.querySelectorAll( 'button' );
     for (var item of list) {
       console.log(item);
-      item.disabled = "disabled";
+      item.disabled = 'disabled';
     }
-  }
+  };
   msg.onend = function(){
     console.log('hello fin');
-    document.getElementById(data.id).disabled = "";
+    document.getElementById(data.id).disabled = '';
     var list = document.querySelectorAll( 'button' );
     for (var item of list) {
-      item.disabled = "";
+      item.disabled = '';
     }
-  }
+  };
   window.speechSynthesis.speak(msg);
   socket.emit('speech', data.id);
 }

@@ -1,4 +1,6 @@
-Phrases = {
+/* eslint no-unused-vars:0 */
+
+var Phrases = {
   'morning': {
     answer: 'おはよう、ございます。今日も、はりきっていきましょう。',
     question: 'おはようございます。'

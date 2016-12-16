@@ -1,3 +1,5 @@
+
+/* global Phrases: false, io: false */
 var socket = io();
 
 window.onload = function(){

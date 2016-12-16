@@ -1,3 +1,5 @@
+/* global Adawarp: false, io: false */
+
 var socket = io();
 var peer = new Adawarp();
 var conn;

@@ -40,7 +40,7 @@ class BoardManager {
       this.servoMove(yaw, 10);
       this.servoAction(yaw, 10, right, 100, left, 90, 1000);
     } else if (command == 'what') {
-      console.log("command what");
+      console.log('command what');
       this.servoAction(yaw, 80, right, 70, left, 50, 1000);
       this.board.wait(time, function() {
         this.servoAction(yaw, 60, right, 90, left, 90, 1000);
@@ -63,14 +63,14 @@ class BoardManager {
     }*/
   }
 
-  
+
 
   servoStop(){
     servo_yaw.stop();
     servo_right.stop();
     servo_left.stop();
     time = 0;
-  };
+  }
 }
 
 module.exports = BoardManager;

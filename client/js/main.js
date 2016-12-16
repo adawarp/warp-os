@@ -1,3 +1,5 @@
+/* global Adawarp: false, io: false */
+
 var socket = io();
 var peer = new Adawarp();
 var conn;
@@ -14,16 +16,16 @@ window.onload = function(){
 
 
 peer.on('connection', function(conn) {
-  document.getElementById("partner_id").innerHTML = conn.peer;
+  document.getElementById('partner_id').innerHTML = conn.peer;
   conn.on('data', function(data){
     console.log(data);
-    document.getElementById("receive_message").innerHTML = data;
+    document.getElementById('receive_message').innerHTML = data;
     socket.emit('command', JSON.parse(data));
   });
 });
 
 function callStart(){
-  partner_id = document.getElementById("partner-id-input").value;
+  partner_id = document.getElementById('partner-id-input').value;
   conn = peer.connect(partner_id);
 }
 
@@ -63,5 +65,5 @@ function outputUpdate(data) {
     document.querySelector('#left').value = data.vol;
   }
   socket.emit('servo', data);
-  console.log(data.servo + ":" + data.vol);
+  console.log(data.servo + ':' + data.vol);
 }

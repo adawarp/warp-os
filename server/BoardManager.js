@@ -35,75 +35,61 @@ class BoardManager {
   }
 
   changeLedStatus(status) {
-    debug(`change LED status: ${status}`)
+    debug(`change LED status: ${status}`);
     if(!this.isActive) return;
     this.io.sockets.emit('ledStatus', this.ledStatus);
     this.status = status;
     if(status == 'on') {
-      console.log('turn on led...');
       this.led.on();
     } else if (status == 'blink') {
-      console.log('blink led...');
       this.led.blink(500);
     } else {
-      console.log('turn off led');
       this.led.stop().off();
     }
   }
 
   servoMove(servoId, deg) {
-    debug(`servo move: ${servoId} to ${deg}`)
+    debug(`servo move: ${servoId} to ${deg}`);
 
     if(!this.isActive) return;
     if (deg !== null && deg !== undefined) this.servos[servoId].to(deg);
   }
 
-  servoAction(yaw_d, right_d, left_d, movetime) {
-    debug(`servo action, yaw: ${yaw_d}, right: ${right_d}, left: ${left_d}`)
+  servoAction(yaw_d, right_d, left_d, time) {
+    return () => {
+      return new Promise((res) => {
+        debug(`servo action, yaw: ${yaw_d}, right: ${right_d}, left: ${left_d}, time: ${time} ms`);
 
-    if(!this.isActive) return;
-    this.servos.yaw.to(yaw_d, movetime);
-    this.servos.right.to(right_d, movetime);
-    this.servos.left.to(left_d, movetime);
-  }
-
-  servoCommand(board, command, yaw, right, left) {
-    if(!this.isActive) return;
-    let time = 0;
-    if (command == 'name') {
-      this.servoMove(yaw, 10);
-      this.servoAction(yaw, 10, right, 100, left, 90, 1000);
-    } else if (command == 'what') {
-      console.log('command what');
-      this.servoAction(yaw, 80, right, 70, left, 50, 1000);
-      this.board.wait(time, function() {
-        this.servoAction(yaw, 60, right, 90, left, 90, 1000);
+        if(this.isActive) {
+          this.servos.yaw.to(yaw_d, time);
+          this.servos.right.to(right_d, time);
+          this.servos.left.to(left_d, time);
+        }
+        this.wait(time)()
+      .then(res);
       });
-    }
+    };
   }
 
   servoStop(){
-    debu('servo stop');
+    debug('servo stop');
     if(!this.isActive) return;
 
     this.servos.yaw.stop();
     this.servos.right.stop();
     this.servos.left.stop();
-    time = 0;
   }
 
-  wait(time, callback) {
-    debug(`waiting ${time} ms, callback: ${callback}`);
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        debug('awake');
-        if(callback) {
-          debug(`do callback`);
-          callback();
-        }
-        res();
-      }, time);
-    });
+  wait(time) {
+    return () => {
+      debug(`waiting ${time} ms`);
+      return new Promise((res) => {
+        setTimeout(() => {
+          debug('awake');
+          res();
+        }, time);
+      });
+    };
   }
 }
 

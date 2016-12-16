@@ -1,18 +1,42 @@
-
 /* global Phrases: false, io: false */
 var socket = io();
+var lng_now = 'ja';
 
 window.onload = function(){
   socket = io.connect();
-  initQuestionList();
-
+  initQuestionList(PhrasesJa);
 };
 
-function initQuestionList() {
+window.onbeforeunload = function() {
+  window.speechSynthesis.cancel();
+};
+
+var phrase_list = {
+  ja : PhrasesJa,
+  en : PhrasesEn,
+  cn : PhrasesCn
+}
+
+var lng_code = {
+  ja : 'ja-JP',
+  en : 'en-US',
+  cn : 'zh-CN'
+}
+
+function initQuestionList(Phrases) {
   var rootElement = document.getElementById('question-list');
+  rootElement.textContent = null;
   for (var key in Phrases) {
     rootElement.appendChild(buildQuestionButton(Phrases, key));
   }
+}
+
+function sellng() {
+  window.speechSynthesis.cancel();
+  pullSellect = document.pullForm.language.selectedIndex;
+  lng = document.pullForm.language.options[pullSellect].value;
+  initQuestionList(phrase_list[lng]);
+  lng_now = lng;
 }
 
 function buildQuestionButton(phrases, key) {
@@ -20,32 +44,32 @@ function buildQuestionButton(phrases, key) {
   button.id = key;
   button.class = 'questionee';
   button.onclick = function() {
-    talk({id: key, script: Phrases[key].answer});
+    talk({id: key, script: phrases[key].answer});
   };
-  button.textContent = Phrases[key].question;
+  button.textContent = phrases[key].question;
   return button;
 }
 
-
 function talk(data) {
+  window.speechSynthesis.resume();
   var msg = new SpeechSynthesisUtterance();
   msg.volume = 1; //ボリューム
   msg.rate = 0.9;  //レート
   msg.pitch = 1; //ピッチ
   msg.text = data.script;
-  msg.lang = 'ja-JP'; //言語
+  msg.lang = lng_code[lng_now]; //言語
 
   msg.onstart = function(){
-    console.log('hello start');
+    console.log('start');
     document.getElementById(data.id).disabled = 'disabled';
     var list = document.querySelectorAll( 'button' );
     for (var item of list) {
-      console.log(item);
       item.disabled = 'disabled';
     }
   };
+  //---todo:FireFox specific code
   msg.onend = function(){
-    console.log('hello fin');
+    console.log('end');
     document.getElementById(data.id).disabled = '';
     var list = document.querySelectorAll( 'button' );
     for (var item of list) {
@@ -53,5 +77,5 @@ function talk(data) {
     }
   };
   window.speechSynthesis.speak(msg);
-  socket.emit('speech', data.id);
+  //socket.emit('speech', data.id);
 }

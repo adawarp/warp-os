@@ -1,7 +1,8 @@
-# Warp OS for mac #
+# WARP-robot #
+Web Arduino Robotics Platform
 
 ### What is this repository for? 
-Control arduino and iRobot create2 from remotely.
+to create WARP-robot
 
 ![yellowLine](client/assets/images/yellowLine.png)
 
@@ -13,16 +14,9 @@ $ cd path
 $ npm install
 $ npm start
 ```
-※WARNING : You have to connect arduino first and roomba serial cable.  
-
-![yellowLine](client/assets/images/yellowLine.png)
-### Index    
-**001.warp browser ver 0.0.1**  
-Control arduino and roomba.   
-Local demo : http://localhost:PORT/001.warp-browser/
-
 
 ![yellowLine](client/assets/images/yellowLine.png)
 
 ### References ###
-[adawarp.com](http://adawarp.com/)  
+[adawarp.com](http://adawarp.com/) 
+[Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) 

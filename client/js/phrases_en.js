@@ -1,6 +1,6 @@
 /* eslint no-unused-vars:0 */
 
-var Phrases = {
+var PhrasesEn = {
   'morning': {
     answer: 'Good morning, hava a nice day.',
     question: 'Good morning.'
@@ -12,5 +12,5 @@ var Phrases = {
   'what': {
     answer: 'I can sing a song.',
     question: 'What can you do?'
-  },
+  }
 };

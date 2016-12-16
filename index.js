@@ -1,12 +1,6 @@
 "use strict";
 const PORT = 4222;
 
-//iRobot create2 modules
-const SerialPort = require('serialport');
-const fs = require('fs');
-const debug = require('debug')('create2:driver');
-const Repl = require('repl');
-
 //Server settings
 const express = require('express');
 const app = express();

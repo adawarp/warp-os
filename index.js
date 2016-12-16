@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const PORT = 4222;
 
 //Server settings
@@ -51,9 +51,9 @@ board.on('ready', function() {
 //--HACK: This is fucking code. need refactoring ASAP!!!
 io.sockets.on('connection', function(socket) {
   console.log('hello socket');
-	socket.on('ledStatus', function(status) {
+  socket.on('ledStatus', function(status) {
     boardManager.ledStatus(led, status);
-	});
+  });
   socket.on('servo', function(data) {
     if (data.servo == 'servo_yaw') {
       boardManager.servoMove(servo_yaw, data.vol);
@@ -68,82 +68,82 @@ io.sockets.on('connection', function(socket) {
       servoAction(90, 10, 50, 1000);
       move0();
     } else if (command == 'morning') {
-      console.log("command morning");
+      console.log('command morning');
       servoAction(80, 70, 50, 1000);
       move2();
       board.wait(3000, function() {
         servoAction(120, 70, 80, 1000);
       });
     }
-     else if (command == 'what') {
-      console.log("command what");
+    else if (command == 'what') {
+      console.log('command what');
       servoAction(80, 70, 50, 1000);
       move1();
       board.wait(3000, function() {
         servoAction(120, 70, 80, 1000);
       });
     } else if (command == 'who') {
-      console.log("command what");
+      console.log('command what');
       servoAction(90, 90, 90, 1000);
       move2();
       board.wait(3000, function() {
         servoAction(90, 70, 80, 1000);
       });
     } else if (command == 'how-much') {
-      console.log("command how-much");
+      console.log('command how-much');
       servoAction(90, 10, 50, 1000);
       move2();
     } else if (command == 'business') {
-      console.log("command business");
+      console.log('command business');
       servoAction(90, 10, 50, 1000);
       move3();
       board.wait(3000, function() {
         servoAction(90, 70, 80, 1000);
       });
     } else if (command == 'rich') {
-      console.log("command rich");
+      console.log('command rich');
       servoAction(90, 90, 90, 1000);
       move4();
       board.wait(3000, function() {
         servoAction(90, 90, 90, 1000);
       });
     } else if (command == 'danbo') {
-      console.log("command danbo");
+      console.log('command danbo');
       servoAction(30, 90, 90, 1000);
       move3();
       board.wait(3000, function() {
         servoAction(90, 70, 80, 1000);
       });
     } else if (command == 'touch') {
-      console.log("command touch");
+      console.log('command touch');
       servoAction(30, 90, 90, 1000);
       move1();
       board.wait(3000, function() {
         servoAction(90, 70, 80, 1000);
       });
     } else if (command == 'weather') {
-      console.log("command weather");
+      console.log('command weather');
       servoAction(10, 90, 90, 1000);
       move4();
       board.wait(4000, function() {
         servoAction(10, 90, 80, 1000);
       });
     } else if (command == 'amazing') {
-      console.log("command amazing");
+      console.log('command amazing');
       servoAction(30, 90, 90, 1000);
       move4();
       board.wait(3000, function() {
         servoAction(90, 70, 80, 1000);
       });
     }  else if (command == 'document') {
-      console.log("command document");
+      console.log('command document');
       servoAction(30, 90, 90, 1000);
       move1();
       board.wait(3000, function() {
         servoAction(90, 70, 80, 1000);
       });
     } else if (command == 'noperson') {
-      console.log("command noperson");
+      console.log('command noperson');
       servoAction(10, 90, 90, 1000);
       move3();
       board.wait(4000, function() {
@@ -151,7 +151,7 @@ io.sockets.on('connection', function(socket) {
       });
     }
   });
-  
+
 });
 
 function servoMove(servo, deg) {

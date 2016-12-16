@@ -2,7 +2,28 @@ var socket = io();
 
 window.onload = function(){
   socket = io.connect();
+  initQuestionList();
+
 };
+
+function initQuestionList() {
+  var rootElement = document.getElementById("question-list");
+  for (var key in Phrases) {
+    rootElement.appendChild(buildQuestionButton(Phrases, key));
+  }
+}
+
+function buildQuestionButton(phrases, key) {
+  var button = document.createElement("button");
+  button.id = key;
+  button.class = "questionee";
+  button.onclick = function() {
+    talk({id: key, script: Phrases[key].answer});
+  }
+  button.textContent = Phrases[key].question;
+  return button;
+}
+
 
 function talk(data) {
   var msg = new SpeechSynthesisUtterance();

@@ -46,7 +46,7 @@ peer.on('connection', function(conn) {
   });
 });
 
-function callStart(){
+function startCall(){
   let partnerId = document.getElementById('partner-id-input').value;
   conn = peer.connect(partnerId);
 }
@@ -73,10 +73,9 @@ function handleSliderChanged(event) {
   let angle = event.target.value;
   let servo = event.target.dataset.servo;
   servoView[servo].value = angle;
-  outputUpdate(servo, angle);
+  sendServoAngle(servo, angle);
 }
-
-function outputUpdate(servo, angle) {
+function sendServoAngle(servo, angle) {
   socket.emit('servo', {
     servo :`servo_${servo}`,
     vol : angle

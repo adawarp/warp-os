@@ -34,7 +34,7 @@ function initQuestionList(phrases) {
   }
 }
 
-function sellang() {
+function selectLang() {
   window.speechSynthesis.cancel();
   var pullSellect = document.setting.language.selectedIndex;
   var lang = document.setting.language.options[pullSellect].value;

@@ -4,14 +4,16 @@ var currentLang = 'ja';
 
 window.onload = function(){
   socket = io.connect();
-  initQuestionList(langCode.ja.dict);
+  initQuestionList(Languages.ja.dict);
 };
 
 window.onbeforeunload = function() {
   window.speechSynthesis.cancel();
 };
 
-var langCode = {
+var langCode;
+
+var Languages = {
   ja : {
     dict: PhrasesJa,
     code: 'ja-JP'
@@ -38,7 +40,7 @@ function sellang() {
   window.speechSynthesis.cancel();
   var pullSellect = document.pullForm.language.selectedIndex;
   var lang = document.pullForm.language.options[pullSellect].value;
-  initQuestionList(langCode[lang].dict);
+  initQuestionList(Languages[lang].dict);
   currentLang = lang;
 }
 
@@ -60,7 +62,7 @@ function talk(data) {
   msg.rate = 0.9;  //レート
   msg.pitch = 1; //ピッチ
   msg.text = data.script;
-  msg.lang = langCode[currentLang].code; //言語
+  msg.lang = Languages[currentLang].code; //言語
 
   msg.onstart = function(){
     document.getElementById(data.id).disabled = 'disabled';

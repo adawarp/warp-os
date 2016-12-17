@@ -26,11 +26,11 @@ var Languages = {
   }
 }
 
-function initQuestionList(Phrases) {
+function initQuestionList(phrases) {
   var rootElement = document.getElementById('question-list');
   rootElement.textContent = null;
-  for (var key in Phrases) {
-    rootElement.appendChild(buildQuestionButton(Phrases, key));
+  for (var key in phrases) {
+    rootElement.appendChild(buildQuestionButton(phrases, key));
   }
 }
 

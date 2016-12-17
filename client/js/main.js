@@ -1,19 +1,43 @@
 /* global Adawarp: false, io: false */
 
-var socket = io();
-var peer = new Adawarp();
-var conn;
+let ledOnButton, ledOffButton, ledBlinkButton,
+  servoYawSlider, servoRightSlider, servoLeftSlider,
+  servoView = {},
+  conn, socket, peer = new Adawarp();
 
 window.onload = function(){
   socket = io.connect();
+  ledOnButton = document.getElementById('on_btn');
+  ledOffButton = document.getElementById('off_btn');
+  ledBlinkButton = document.getElementById('blink_btn');
+
+  servoYawSlider = document.getElementById('yaw_slider');
+  servoRightSlider = document.getElementById('right_slider');
+  servoLeftSlider = document.getElementById('left_slider');
+
+  servoView['yaw'] = document.getElementById('yaw');
+  servoView['right'] = document.getElementById('right');
+  servoView['left'] = document.getElementById('left');
+
+  ledOnButton.onclick = () => {
+    changeLedStatus('on');
+  };
+  ledOffButton.onclick = () => {
+    changeLedStatus('off');
+  };
+  ledBlinkButton.onclick = () => {
+    changeLedStatus('blink');
+  };
+
+  servoYawSlider.oninput = handleSliderChanged;
+  servoRightSlider.oninput = handleSliderChanged;
+  servoLeftSlider.oninput = handleSliderChanged;
+
   peer.on('open', function(){
-    //document.getElementById("my_id").innerHTML = peer.id;
   });
   peer.login();
-  ledStatus(false);
+  changeLedStatus(false);
 };
-
-
 
 peer.on('connection', function(conn) {
   document.getElementById('partner_id').innerHTML = conn.peer;
@@ -25,45 +49,41 @@ peer.on('connection', function(conn) {
 });
 
 function callStart(){
-  partner_id = document.getElementById('partner-id-input').value;
-  conn = peer.connect(partner_id);
+  let partnerId = document.getElementById('partner-id-input').value;
+  conn = peer.connect(partnerId);
 }
 
-function ledStatus(status) {
-  let on_btn = document.getElementById('on_btn');
-  let blink_btn = document.getElementById('blink_btn');
-  let off_btn = document.getElementById('off_btn');
+function changeLedStatus(status) {
   socket.emit('ledStatus', status);
-  colorSwitcher(status);
+  changeButtonColor(status);
 }
 
-function colorSwitcher (status) {
+function changeButtonColor(status) {
   if(status == 'on') {
-    console.log('led on...');
-    on_btn.style.backgroundColor = 'red';
-    blink_btn.style.backgroundColor = '#4CAF50';
-    off_btn.style.backgroundColor = '#4CAF50';
+    ledOnButton.style.backgroundColor = 'red';
+    ledBlinkButton.style.backgroundColor = '#4CAF50';
+    ledOffButton.style.backgroundColor = '#4CAF50';
   } else if (status == 'blink') {
-    console.log('led blink...');
-    on_btn.style.backgroundColor = '#4CAF50';
-    blink_btn.style.backgroundColor = 'red';
-    off_btn.style.backgroundColor = '#4CAF50';
+    ledOnButton.style.backgroundColor = '#4CAF50';
+    ledBlinkButton.style.backgroundColor = 'red';
+    ledOffButton.style.backgroundColor = '#4CAF50';
   } else {
-    console.log('led off...');
-    on_btn.style.backgroundColor = '#4CAF50';
-    blink_btn.style.backgroundColor = '#4CAF50';
-    off_btn.style.backgroundColor = 'red';
+    ledOnButton.style.backgroundColor = '#4CAF50';
+    ledBlinkButton.style.backgroundColor = '#4CAF50';
+    ledOffButton.style.backgroundColor = 'red';
   }
 }
 
-function outputUpdate(data) {
-  if (data.servo == 'servo_yaw') {
-    document.querySelector('#yaw').value = data.vol;
-  } else if (data.servo == 'servo_right') {
-    document.querySelector('#right').value = data.vol;
-  } else if (data.servo == 'servo_left') {
-    document.querySelector('#left').value = data.vol;
-  }
-  socket.emit('servo', data);
-  console.log(data.servo + ':' + data.vol);
+function handleSliderChanged(event) {
+  let angle = event.target.value;
+  let servo = event.target.dataset.servo;
+  servoView[servo].value = angle;
+  outputUpdate(servo, angle);
+}
+
+function outputUpdate(servo, angle) {
+  socket.emit('servo', {
+    servo :`servo_${servo}`,
+    vol : angle
+  });
 }

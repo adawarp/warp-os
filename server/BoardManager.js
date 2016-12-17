@@ -3,6 +3,7 @@ const five = require('johnny-five');
 const board = new five.Board({'repl':false});
 const debug = require('debug')('warp:board');
 const EventEmitter = require('events');
+const Records = require('./Records');
 
 class BoardManager extends EventEmitter {
 
@@ -79,6 +80,25 @@ class BoardManager extends EventEmitter {
     this.servos.yaw.stop();
     this.servos.right.stop();
     this.servos.left.stop();
+  }
+
+  play(key) {
+    if(Records.hasOwnProperty(key)) {
+      const record = Records[key];
+      debug(`load record : ${record}`);
+      let time = 0;
+      const operations = record.map((frame) => {
+        const promise = this.servoAction(frame.yaw, frame.right, frame.left, frame.time - time);
+        time = frame.time;
+        return promise;
+      });
+
+      return operations.reduce((currentFrame, nextFrame) => {
+        return currentFrame.then(nextFrame);
+      }, Promise.resolve());
+    } else {
+      return Promise.reject(`record: "${key}" is not found.`);
+    }
   }
 
   wait(time) {

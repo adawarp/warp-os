@@ -11,8 +11,6 @@ window.onbeforeunload = function() {
   window.speechSynthesis.cancel();
 };
 
-var langCode;
-
 var Languages = {
   ja : {
     dict: PhrasesJa,
@@ -38,7 +36,7 @@ function initQuestionList(Phrases) {
 
 function sellang() {
   window.speechSynthesis.cancel();
-  var pullSellect = document.pullForm.language.selectedIndex;
+  var pullSellect = document.setting.language.selectedIndex;
   var lang = document.pullForm.language.options[pullSellect].value;
   initQuestionList(Languages[lang].dict);
   currentLang = lang;

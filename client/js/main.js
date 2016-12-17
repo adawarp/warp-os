@@ -1,15 +1,16 @@
 /* global Adawarp: false, io: false */
 
-let ledOnButton, ledOffButton, ledBlinkButton,
+let ledButtons = {},
+  lastSelectedButtonIndex,
   servoYawSlider, servoRightSlider, servoLeftSlider,
   servoView = {},
   conn, socket, peer = new Adawarp();
 
 window.onload = function(){
   socket = io.connect();
-  ledOnButton = document.getElementById('on_btn');
-  ledOffButton = document.getElementById('off_btn');
-  ledBlinkButton = document.getElementById('blink_btn');
+  ledButtons['on'] = document.getElementById('on_btn');
+  ledButtons['off'] = document.getElementById('off_btn');
+  ledButtons['blink'] = document.getElementById('blink_btn');
 
   servoYawSlider = document.getElementById('yaw_slider');
   servoRightSlider = document.getElementById('right_slider');
@@ -19,15 +20,13 @@ window.onload = function(){
   servoView['right'] = document.getElementById('right');
   servoView['left'] = document.getElementById('left');
 
-  ledOnButton.onclick = () => {
-    changeLedStatus('on');
-  };
-  ledOffButton.onclick = () => {
-    changeLedStatus('off');
-  };
-  ledBlinkButton.onclick = () => {
-    changeLedStatus('blink');
-  };
+  for(let key in ledButtons) {
+    ((index) => {
+      ledButtons[index].onclick = () => {
+        changeLedStatus(index);
+      };
+    })(key);
+  }
 
   servoYawSlider.oninput = handleSliderChanged;
   servoRightSlider.oninput = handleSliderChanged;
@@ -36,13 +35,12 @@ window.onload = function(){
   peer.on('open', function(){
   });
   peer.login();
-  changeLedStatus(false);
+  changeLedStatus('on');
 };
 
 peer.on('connection', function(conn) {
   document.getElementById('partner_id').innerHTML = conn.peer;
   conn.on('data', function(data){
-    console.log(data);
     document.getElementById('receive_message').innerHTML = data;
     socket.emit('command', JSON.parse(data));
   });
@@ -58,20 +56,17 @@ function changeLedStatus(status) {
   changeButtonColor(status);
 }
 
-function changeButtonColor(status) {
-  if(status == 'on') {
-    ledOnButton.style.backgroundColor = 'red';
-    ledBlinkButton.style.backgroundColor = '#4CAF50';
-    ledOffButton.style.backgroundColor = '#4CAF50';
-  } else if (status == 'blink') {
-    ledOnButton.style.backgroundColor = '#4CAF50';
-    ledBlinkButton.style.backgroundColor = 'red';
-    ledOffButton.style.backgroundColor = '#4CAF50';
-  } else {
-    ledOnButton.style.backgroundColor = '#4CAF50';
-    ledBlinkButton.style.backgroundColor = '#4CAF50';
-    ledOffButton.style.backgroundColor = 'red';
+function changeButtonColor(index) {
+  if (lastSelectedButtonIndex === index) {
+    return;
   }
+  if (ledButtons.hasOwnProperty(lastSelectedButtonIndex)) {
+    ledButtons[lastSelectedButtonIndex].classList.remove('pressed');
+    ledButtons[lastSelectedButtonIndex].classList.add('released');
+  }
+  ledButtons[index].classList.remove('released');
+  ledButtons[index].classList.add('pressed');
+  lastSelectedButtonIndex = index;
 }
 
 function handleSliderChanged(event) {

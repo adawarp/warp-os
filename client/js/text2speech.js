@@ -1,10 +1,11 @@
-/* global Phrases: false, io: false */
+/* global io: false */
 var socket = io();
 var currentLang = 'ja';
 
 window.onload = function(){
   socket = io.connect();
   initQuestionList(Languages.ja.dict);
+  initLanguageList(Languages);
 };
 
 window.onbeforeunload = function() {
@@ -14,16 +15,27 @@ window.onbeforeunload = function() {
 var Languages = {
   ja : {
     dict: PhrasesJa,
-    code: 'ja-JP'
+    code: 'ja-JP',
+    name: '日本語'
   },
   en : {
     dict: PhrasesEn,
-    code: 'en-US'
+    code: 'en-US',
+    name: 'English'
   },
   cn : {
     dict: PhrasesCn,
-    code: 'zh-CN'
+    code: 'zh-CN',
+    name: '中文'
   }
+};
+
+function initLanguageList(languages) {
+  var rootElement = document.getElementById('language-list');
+  for (var key in languages) {
+    rootElement.appendChild(buildLanguageOptionElement(languages, key));
+  }
+  rootElement.onchange = selectLang;
 }
 
 function initQuestionList(phrases) {
@@ -38,9 +50,16 @@ function selectLang() {
   window.speechSynthesis.cancel();
   var selectedLang = document.setting.language.selectedOptions[0].value;
   initQuestionList(Languages[selectedLang].dict);
-  currentLang = lang;
+  currentLang = selectedLang;
 }
 
+function buildLanguageOptionElement(languages, key, isSelected) {
+  var option = document.createElement('option');
+  option.value = key;
+  option.textContent = languages[key].name;
+  option.selected = isSelected;
+  return option;
+}
 function buildQuestionButton(phrases, key) {
   var button = document.createElement('button');
   button.id = key;

@@ -1,0 +1,26 @@
+{
+  "name": "warp-os-mac",
+  "version": "0.0.1",
+  "description": "warpOS for mac",
+  "main": "main.js",
+  "author": "Kentaro Teramoto <zigen@adawarp.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdra0624/warp-os-mac/issues"
+  },
+  "homepage": "https://github.com/cdra0624/warp-os-mac#readme",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "johnny-five": "^0.10.5",
+    "repl": "^0.1.3",
+    "serialport": "^4.0.3",
+    "socket.io": "^1.5.0"
+  },
+  "engines": {
+    "node": "6.5.0",
+    "electron": "1.4.13"
+  },
+  "engine-strict": true
+}

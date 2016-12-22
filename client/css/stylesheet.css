@@ -18,3 +18,11 @@ h1{
   font-weight: bold;
   text-align: center;
 }
+
+button.released {
+  background-color: #4CAF50;
+}
+
+button.pressed {
+  background-color: red;
+}

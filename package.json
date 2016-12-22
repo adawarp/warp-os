@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron src/main.js",
-    "lint": "eslint --fix -c ./.eslintrc.js ./*.js ./src/*.js ./src/**/*.js",
+    "lint": "eslint --fix -c ./.eslintrc.js ./*.js ./src/*.js ./src/*/*/*.js",
     "pack": "build --dir",
     "dist": "build"
   },

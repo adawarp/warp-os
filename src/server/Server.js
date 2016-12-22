@@ -20,8 +20,6 @@ class Server {
     this.app.use(express.static(__dirname + '/../client'));
     this.http = require('http').Server(this.app);
     this.io = require('socket.io')(this.http);
-
-
   }
 
   start() {
@@ -59,4 +57,8 @@ class Server {
   }
 }
 
+if(process.argv0 === 'node' || process.argv0 === 'node-dev') {
+  let server = new Server();  
+  server.start();
+}
 module.exports = Server;

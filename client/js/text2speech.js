@@ -36,9 +36,8 @@ function initQuestionList(phrases) {
 
 function selectLang() {
   window.speechSynthesis.cancel();
-  var pullSellect = document.setting.language.selectedIndex;
-  var lang = document.setting.language.options[pullSellect].value;
-  initQuestionList(Languages[lang].dict);
+  var selectedLang = document.setting.language.selectedOptions[0].value;
+  initQuestionList(Languages[selectedLang].dict);
   currentLang = lang;
 }
 

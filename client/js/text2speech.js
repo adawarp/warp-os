@@ -2,38 +2,25 @@
 var socket = io();
 var currentLang = 'ja';
 
+if (!("Languages" in window)) {
+  window.Languages = {};
+}
+
 window.onload = function(){
   socket = io.connect();
-  initQuestionList(Languages.ja.dict);
-  initLanguageList(Languages);
+  initQuestionList(window.Languages[currentLang].dict);
+  initLanguageList(window.Languages);
 };
 
 window.onbeforeunload = function() {
   window.speechSynthesis.cancel();
 };
 
-var Languages = {
-  ja : {
-    dict: PhrasesJa,
-    code: 'ja-JP',
-    name: '日本語'
-  },
-  en : {
-    dict: PhrasesEn,
-    code: 'en-US',
-    name: 'English'
-  },
-  cn : {
-    dict: PhrasesCn,
-    code: 'zh-CN',
-    name: '中文'
-  }
-};
-
 function initLanguageList(languages) {
   var rootElement = document.getElementById('language-list');
+  rootElement.innerHTML = null;
   for (var key in languages) {
-    rootElement.appendChild(buildLanguageOptionElement(languages, key));
+    rootElement.appendChild(buildLanguageOptionElement(languages, key, key === currentLang));
   }
   rootElement.onchange = selectLang;
 }
@@ -49,7 +36,7 @@ function initQuestionList(phrases) {
 function selectLang() {
   window.speechSynthesis.cancel();
   var selectedLang = document.setting.language.selectedOptions[0].value;
-  initQuestionList(Languages[selectedLang].dict);
+  initQuestionList(window.Languages[selectedLang].dict);
   currentLang = selectedLang;
 }
 
@@ -78,7 +65,7 @@ function talk(data) {
   msg.rate = 0.9;  //レート
   msg.pitch = 1; //ピッチ
   msg.text = data.script;
-  msg.lang = Languages[currentLang].code; //言語
+  msg.lang = window.Languages[currentLang].code; //言語
 
   msg.onstart = function(){
     document.getElementById(data.id).disabled = 'disabled';

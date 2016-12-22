@@ -6,14 +6,18 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" >
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="https://unpkg.com/adawarp@latest/dist/adawarp.js"></script>
-    <script src="js/phrases.js"></script>
-
     <script src="js/text2speech.js"></script>
+    <script src="js/phrases_ja.js"></script>
+    <script src="js/phrases_en.js"></script>
+    <script src="js/phrases_cn.js"></script>
 
   </HEAD>
 <BODY>
   <img src="assets/images/yellowLine.png" width="100%"/>
   <H1>しつもんにこたえるよ！</H1>
+  <form name="setting">
+    <select id="language-list" name="language"></select>
+  </form>
   <div id="question-list"></div>
   <hr>
   <img src="assets/images/adawarp-logo-300.png" style="width : 200px">

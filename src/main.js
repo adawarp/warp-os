@@ -1,7 +1,6 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-console.log(process.versions);
 
 const path = require('path');
 const url = require('url');
@@ -19,8 +18,6 @@ function createWindow () {
     protocol: 'http:',
     slashes: true
   }));
-
-  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function () {
     mainWindow = null;

@@ -12,25 +12,22 @@
   <img src="assets/images/yellowLine.png" width="100%"/>
   <H1>warp-os-mac</H1>
   <hr>
-  <button id='on_btn' onclick='ledStatus("on")'>LedOn</button>
-  <button id='blink_btn' onclick='ledStatus("blink")'>LedBlink</button>
-  <button id='off_btn' onclick='ledStatus("off")'>LedOff</button>
+  <button id='on_btn'>LedOn</button>
+  <button id='blink_btn'>LedBlink</button>
+  <button id='off_btn'>LedOff</button>
   <div>
     <label for="fader">servo_yaw</label>
-    <input type="range" min="30" max="150" value="90" id="fader" 
-      step="1" oninput="outputUpdate({servo : 'servo_yaw', vol : value})">
+    <input type="range" min="30" max="150" value="90" id="yaw_slider" data-servo="yaw" step="1">
     <output for="fader" id="yaw">90</output>
   </div>
   <div>
     <label for="fader">servo_right</label>
-    <input type="range" min="30" max="150" value="90" id="fader" 
-      step="1" oninput="outputUpdate({servo : 'servo_right', vol : value})">
+    <input type="range" min="30" max="150" value="90" id="right_slider" data-servo="right" step="1">
     <output for="fader" id="right">90</output>
   </div>
   <div>
     <label for="fader">servo_left</label>
-    <input type="range" min="30" max="150" value="90" id="fader" 
-      step="1" oninput="outputUpdate({servo : 'servo_left', vol : value})">
+    <input type="range" min="30" max="150" value="90" id="left_slider" data-servo="left" step="1">
     <output for="fader" id="left">90</output>
   </div>
   <hr>

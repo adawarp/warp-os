@@ -49,7 +49,7 @@ var PhrasesJa = {
     answer: 'あだわあぷ、どっとこむ、か、この、ふらいやあを、ごらんください。',
     question: '資料はある？'
   },
-  'nopersion': {
+  'noperson': {
     answer: 'めいしが、めのまえに、あります。ごれんらく、おまちしております。',
     question: '担当者がいなくなったら？'
   }

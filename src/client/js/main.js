@@ -20,7 +20,7 @@ window.onload = function(){
   servoView['right'] = document.getElementById('right');
   servoView['left'] = document.getElementById('left');
 
-  for(let key in ledButtons) {
+  for (let key in ledButtons) {
     ((index) => {
       ledButtons[index].onclick = () => {
         changeLedStatus(index);
@@ -60,6 +60,7 @@ function changeButtonColor(index) {
   if (lastSelectedButtonIndex === index) {
     return;
   }
+
   if (ledButtons.hasOwnProperty(lastSelectedButtonIndex)) {
     ledButtons[lastSelectedButtonIndex].classList.remove('pressed');
     ledButtons[lastSelectedButtonIndex].classList.add('released');

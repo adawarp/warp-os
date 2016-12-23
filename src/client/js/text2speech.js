@@ -1,24 +1,18 @@
-/* global io: false */
-var socket = io();
-var currentLang = 'ja';
+let currentLang = 'ja';
 
 if (!('Languages' in window)) {
   window.Languages = {};
 }
 
-window.onload = function(){
-  initQuestionList(window.Languages[currentLang].dict);
-  initLanguageList(window.Languages);
-};
-
-window.onbeforeunload = function() {
+window.addEventListener('beforeunload', function() {
   window.speechSynthesis.cancel();
-};
+});
 
 function initLanguageList(languages) {
-  var rootElement = document.getElementById('language-list');
+  languages = languages || window.Languages || {};
+  let rootElement = document.getElementById('language-list');
   rootElement.innerHTML = null;
-  for (var key in languages) {
+  for (let key in languages) {
     rootElement.appendChild(buildLanguageOptionElement(languages, key, key === currentLang));
   }
 
@@ -26,9 +20,10 @@ function initLanguageList(languages) {
 }
 
 function initQuestionList(phrases) {
-  var rootElement = document.getElementById('question-list');
+  phrases = phrases || window.Languages[currentLang].dict;
+  let rootElement = document.getElementById('question-list');
   rootElement.textContent = null;
-  for (var key in phrases) {
+  for (let key in phrases) {
     rootElement.appendChild(buildQuestionButton(phrases, key));
   }
 
@@ -36,20 +31,20 @@ function initQuestionList(phrases) {
 
 function selectLang() {
   window.speechSynthesis.cancel();
-  var selectedLang = document.setting.language.selectedOptions[0].value;
+  let selectedLang = document.setting.language.selectedOptions[0].value;
   initQuestionList(window.Languages[selectedLang].dict);
   currentLang = selectedLang;
 }
 
 function buildLanguageOptionElement(languages, key, isSelected) {
-  var option = document.createElement('option');
+  let option = document.createElement('option');
   option.value = key;
   option.textContent = languages[key].name;
   option.selected = isSelected;
   return option;
 }
 function buildQuestionButton(phrases, key) {
-  var button = document.createElement('button');
+  let button = document.createElement('button');
   button.id = key;
   button.class = 'questionee';
   button.onclick = function() {
@@ -61,17 +56,17 @@ function buildQuestionButton(phrases, key) {
 
 function talk(data) {
   window.speechSynthesis.resume();
-  var msg = new SpeechSynthesisUtterance();
-  msg.volume = 1; //ボリューム
-  msg.rate = 0.9;  //レート
-  msg.pitch = 1; //ピッチ
+  let msg = new SpeechSynthesisUtterance();
+  msg.volume = 1;
+  msg.rate = 0.9;
+  msg.pitch = 1;
   msg.text = data.script;
-  msg.lang = window.Languages[currentLang].code; //言語
+  msg.lang = window.Languages[currentLang].code;
 
   msg.onstart = function(){
     document.getElementById(data.id).disabled = 'disabled';
-    var list = document.querySelectorAll( 'button' );
-    for (var item of list) {
+    let list = document.querySelectorAll( 'button' );
+    for (let item of list) {
       item.disabled = 'disabled';
     }
 
@@ -79,12 +74,11 @@ function talk(data) {
   //---todo:FireFox specific code
   msg.onend = function(){
     document.getElementById(data.id).disabled = '';
-    var list = document.querySelectorAll( 'button' );
-    for (var item of list) {
+    let list = document.querySelectorAll( 'button' );
+    for (let item of list) {
       item.disabled = '';
     }
 
   };
   window.speechSynthesis.speak(msg);
-  //socket.emit('speech', data.id);
 }

@@ -15,36 +15,39 @@ module.exports = {
       'unix'
     ],
     'block-spacing': [
-      "error"
+      'error'
     ],
     'brace-style': [
-      "error", 
-      "1tbs", { 
-        "allowSingleLine": true 
+      'error', 
+      '1tbs', { 
+        'allowSingleLine': true 
       }
     ],
     'comma-dangle': [
-      "error",
-      "never"
+      'error',
+      'never'
     ],
     'comma-spacing': [
-      "error", { "before": false, "after": true }
+      'error', { 'before': false, 'after': true }
     ],
     'comma-style': [
-      "error",
-      "last"
+      'error',
+      'last'
+    ],
+    'no-var': [
+      'error'
     ],
     'eol-last': [
-      "error",
-      "always"
+      'error',
+      'always'
     ],
     'no-multiple-empty-lines': [
-      "error",
-      { "max": 1, "maxEOF": 1 }
+      'error',
+      { 'max': 1, 'maxEOF': 1 }
     ],
     'func-call-spacing': [
-      "error",
-      "never"
+      'error',
+      'never'
     ],
     'quotes': [
       'error',
@@ -55,24 +58,24 @@ module.exports = {
       'always'
     ],
     eqeqeq: [
-      "error", 
-      "always"
+      'error', 
+      'always'
     ],
     'dot-location': [
-      "error",
-      "property"
+      'error',
+      'property'
     ],
     'curly': [
-      "error"
+      'error'
     ],
     'keyword-spacing': [
-      "error", { "after": true }
+      'error', { 'after': true }
     ],
     'no-extra-parens': [
-      "error"
+      'error'
     ],
     'no-extra-semi': [
-      "error"
+      'error'
     ],
     'no-trailing-spaces': [
       'error'
@@ -84,15 +87,15 @@ module.exports = {
       'warn'
     ],
     'no-useless-return': [
-      "error"
+      'error'
     ],
     'no-multi-spaces': [
-      "error"
+      'error'
     ],
     yoda: [
-      "error",
-      "never", { 
-        "exceptRange": true 
+      'error',
+      'never', { 
+        'exceptRange': true 
       }
     ]
   }

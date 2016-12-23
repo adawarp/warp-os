@@ -1,6 +1,7 @@
-if (!("Languages" in window)) {
+if (!('Languages' in window)) {
   window.Languages = {};
 }
+
 window.Languages['cn'] = {
   code: 'zh-CN',
   name: '中文',

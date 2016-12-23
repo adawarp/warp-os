@@ -2,12 +2,11 @@
 var socket = io();
 var currentLang = 'ja';
 
-if (!("Languages" in window)) {
+if (!('Languages' in window)) {
   window.Languages = {};
 }
 
 window.onload = function(){
-  socket = io.connect();
   initQuestionList(window.Languages[currentLang].dict);
   initLanguageList(window.Languages);
 };
@@ -22,6 +21,7 @@ function initLanguageList(languages) {
   for (var key in languages) {
     rootElement.appendChild(buildLanguageOptionElement(languages, key, key === currentLang));
   }
+
   rootElement.onchange = selectLang;
 }
 
@@ -31,6 +31,7 @@ function initQuestionList(phrases) {
   for (var key in phrases) {
     rootElement.appendChild(buildQuestionButton(phrases, key));
   }
+
 }
 
 function selectLang() {
@@ -73,6 +74,7 @@ function talk(data) {
     for (var item of list) {
       item.disabled = 'disabled';
     }
+
   };
   //---todo:FireFox specific code
   msg.onend = function(){
@@ -81,6 +83,7 @@ function talk(data) {
     for (var item of list) {
       item.disabled = '';
     }
+
   };
   window.speechSynthesis.speak(msg);
   //socket.emit('speech', data.id);

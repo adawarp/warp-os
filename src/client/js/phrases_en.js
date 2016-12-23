@@ -1,6 +1,7 @@
-if (!("Languages" in window)) {
+if (!('Languages' in window)) {
   window.Languages = {};
 }
+
 window.Languages['en'] = {
   code: 'en-US',
   name: 'English',

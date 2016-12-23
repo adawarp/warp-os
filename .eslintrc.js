@@ -14,6 +14,38 @@ module.exports = {
       'error',
       'unix'
     ],
+    'block-spacing': [
+      "error"
+    ],
+    'brace-style': [
+      "error", 
+      "1tbs", { 
+        "allowSingleLine": true 
+      }
+    ],
+    'comma-dangle': [
+      "error",
+      "never"
+    ],
+    'comma-spacing': [
+      "error", { "before": false, "after": true }
+    ],
+    'comma-style': [
+      "error",
+      "last"
+    ],
+    'eol-last': [
+      "error",
+      "always"
+    ],
+    'no-multiple-empty-lines': [
+      "error",
+      { "max": 1, "maxEOF": 1 }
+    ],
+    'func-call-spacing': [
+      "error",
+      "never"
+    ],
     'quotes': [
       'error',
       'single'
@@ -21,6 +53,26 @@ module.exports = {
     'semi': [
       'error',
       'always'
+    ],
+    eqeqeq: [
+      "error", 
+      "always"
+    ],
+    'dot-location': [
+      "error",
+      "property"
+    ],
+    'curly': [
+      "error"
+    ],
+    'keyword-spacing': [
+      "error", { "after": true }
+    ],
+    'no-extra-parens': [
+      "error"
+    ],
+    'no-extra-semi': [
+      "error"
     ],
     'no-trailing-spaces': [
       'error'
@@ -30,6 +82,18 @@ module.exports = {
     ],
     'no-undef': [
       'warn'
+    ],
+    'no-useless-return': [
+      "error"
+    ],
+    'no-multi-spaces': [
+      "error"
+    ],
+    yoda: [
+      "error",
+      "never", { 
+        "exceptRange": true 
+      }
     ]
   }
 };

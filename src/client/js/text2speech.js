@@ -1,15 +1,15 @@
-/* global io: false */
 let currentLang = 'ja';
 
 if (!('Languages' in window)) {
   window.Languages = {};
 }
 
-window.addEventListener("beforeunload", function() {
+window.addEventListener('beforeunload', function() {
   window.speechSynthesis.cancel();
 });
 
 function initLanguageList(languages) {
+  languages = languages || window.Languages || {};
   let rootElement = document.getElementById('language-list');
   rootElement.innerHTML = null;
   for (let key in languages) {
@@ -20,6 +20,7 @@ function initLanguageList(languages) {
 }
 
 function initQuestionList(phrases) {
+  phrases = phrases || window.Languages[currentLang].dict;
   let rootElement = document.getElementById('question-list');
   rootElement.textContent = null;
   for (let key in phrases) {

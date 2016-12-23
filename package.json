@@ -2,11 +2,15 @@
   "name": "warp-os-mac",
   "version": "1.0.0",
   "description": "warpOS for mac",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "lint": "eslint --fix -c ./.eslintrc.js ./*.js ./server/*.js ./client/**/*.js"
+    "start": "node src/server/Server.js",
+    "app": "electron src/main.js",
+    "lint": "eslint --fix -c ./.eslintrc.js ./*.js ./src/*.js ./src/*/*/*.js",
+    "pack": "build --dir",
+    "dist": "build",
+    "rebuild": "electron-rebuild"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,22 @@
     "socket.io": "^1.5.0"
   },
   "devDependencies": {
+    "electron-builder": "^10.9.3",
+    "electron-prebuilt": "1.4.13",
+    "electron-rebuild": "^1.4.0",
     "eslint": "^3.12.2"
-  }
+  },
+  "build": {
+    "appId": "org.adawarp.os",
+    "category": "public.app-category.productivity",
+    "files": [
+      "src",
+      "node_modules"
+    ]
+  },
+  "engines": {
+    "node": "6.5.0",
+    "electron": "1.4.13"
+  },
+  "engine-strict": true
 }

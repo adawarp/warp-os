@@ -6,7 +6,7 @@ let ledButtons = {},
   servoView = {},
   conn, socket, peer = new Adawarp();
 
-window.onload = function(){
+window.addEventListener('DOMContentLoaded', function(){
   socket = io.connect();
   ledButtons['on'] = document.getElementById('on_btn');
   ledButtons['off'] = document.getElementById('off_btn');
@@ -36,7 +36,10 @@ window.onload = function(){
   });
   peer.login();
   changeLedStatus('on');
-};
+
+  initQuestionList(window.Languages[currentLang].dict);
+  initLanguageList(window.Languages);
+});
 
 peer.on('connection', function(conn) {
   document.getElementById('partner_id').innerHTML = conn.peer;

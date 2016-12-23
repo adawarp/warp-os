@@ -7,7 +7,6 @@ if (!('Languages' in window)) {
 }
 
 window.onload = function(){
-  socket = io.connect();
   initQuestionList(window.Languages[currentLang].dict);
   initLanguageList(window.Languages);
 };

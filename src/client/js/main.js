@@ -14,11 +14,23 @@ window.addEventListener('DOMContentLoaded', function() {
   });
   peer.login();
 
+  initAdawarpButton();
   initDeviceManager();
   initQuestionList();
   initLanguageList();
   initLocalVideo();
 });
+
+function initAdawarpButton() {
+  const startCallButton = document.getElementById('start_call_button');
+  if (startCallButton) {
+    startCallButton.onclick = startCall;
+  }
+  const endCallButton = document.getElementById('end_call_button');
+  if (endCallButton) {
+    endCallButton.onclick = endCall;
+  }
+}
 
 peer.on('connection', function(_conn) {
   conn = _conn;

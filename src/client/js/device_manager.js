@@ -1,4 +1,5 @@
 /* global socket: false */
+/* eslint-disable no-unused-vars */
 
 let ledButtons = {},
   lastSelectedButtonIndex,

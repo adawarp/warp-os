@@ -63,7 +63,7 @@ function talk(data) {
   msg.text = data.script;
   msg.lang = window.Languages[currentLang].code;
 
-  msg.onstart = function(){
+  msg.onstart = function() {
     document.getElementById(data.id).disabled = 'disabled';
     let list = document.querySelectorAll( 'button' );
     for (let item of list) {
@@ -72,7 +72,7 @@ function talk(data) {
 
   };
   //---todo:FireFox specific code
-  msg.onend = function(){
+  msg.onend = function() {
     document.getElementById(data.id).disabled = '';
     let list = document.querySelectorAll( 'button' );
     for (let item of list) {

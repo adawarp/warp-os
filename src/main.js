@@ -8,7 +8,7 @@ const Server = require('./server/Server');
 let mainWindow;
 let server;
 
-function createWindow () {
+function createWindow() {
   server = new Server();
   server.start();
   mainWindow = new BrowserWindow({width: 800, height: 600});
@@ -18,21 +18,21 @@ function createWindow () {
     slashes: true
   }));
 
-  mainWindow.on('closed', function () {
+  mainWindow.on('closed', function() {
     mainWindow = null;
   });
 }
 
 app.on('ready', createWindow);
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', function() {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 
 });
 
-app.on('activate', function () {
+app.on('activate', function() {
   if (mainWindow === null) {
     createWindow();
   }

@@ -7,9 +7,9 @@
 let conn, call, localStream, peer = new Adawarp(), socket = io.connect();
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-window.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('DOMContentLoaded', function() {
 
-  peer.on('open', function(info){
+  peer.on('open', function(info) {
     document.getElementById('my_id').textContent = info.id;
   });
   peer.login();
@@ -23,20 +23,20 @@ window.addEventListener('DOMContentLoaded', function(){
 peer.on('connection', function(_conn) {
   conn = _conn;
   document.getElementById('partner_id').textContent = conn.peer;
-  conn.on('data', function(data){
+  conn.on('data', function(data) {
     document.getElementById('receive_message').textContent = data;
     socket.emit('command', JSON.parse(data));
   });
 });
 
-peer.on('call', function(_call){
+peer.on('call', function(_call) {
   if (!localStream) {
     alert('permit user media');
     return;
   }
   call = _call;
   document.getElementById('partner_id').innerHTML = call.peer;
-  call.on('stream', function(stream){
+  call.on('stream', function(stream) {
     const url = URL.createObjectURL(stream);
     document.getElementById('remote_video').src = url;
   });
@@ -44,7 +44,7 @@ peer.on('call', function(_call){
 
 });
 
-function startCall(){
+function startCall() {
   let partnerId = document.getElementById('partner-id-input').value;
   if (!partnerId) {
     alert('type your partner id');
@@ -57,7 +57,7 @@ function startCall(){
   }
 
   call = peer.call(partnerId, localStream);
-  call.on('stream', function(stream){
+  call.on('stream', function(stream) {
     document.getElementById('partner_id').innerHTML = partnerId;
     const url = URL.createObjectURL(stream);
     document.getElementById('remote_video').src = url;
@@ -76,7 +76,7 @@ function endCall() {
 }
 
 function initLocalVideo() {
-  navigator.getUserMedia({audio: true, video: true}, function(stream){
+  navigator.getUserMedia({audio: true, video: true}, function(stream) {
     localStream = stream;
     document.getElementById('local_video').src = URL.createObjectURL(stream);
   }, function() {

@@ -34,6 +34,16 @@ module.exports = {
       'error',
       'last'
     ],
+    'space-before-blocks': [
+      'error'
+    ],
+    'space-before-function-paren': [
+      'error', {
+        'anonymous': 'never',
+        'named': 'never',
+        'asyncArrow': 'always'
+      }
+    ],
     'no-var': [
       'error'
     ],

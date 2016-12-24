@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 let currentLang = 'ja';
 
 if (!('Languages' in window)) {

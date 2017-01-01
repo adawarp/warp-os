@@ -13,7 +13,7 @@ function createWindow() {
   server.start();
   mainWindow = new BrowserWindow({width: 800, height: 600});
   mainWindow.loadURL(url.format({
-    pathname: 'localhost:4222',
+    pathname: 'localhost:9000',
     protocol: 'http:',
     slashes: true
   }));

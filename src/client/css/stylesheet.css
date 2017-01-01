@@ -26,3 +26,8 @@ button.released {
 button.pressed {
   background-color: red;
 }
+
+button.disabled {
+  background-color: gray;
+}
+

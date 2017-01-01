@@ -85,3 +85,4 @@ tags
 
 # Electron
 dist
+src/client/bundle.js

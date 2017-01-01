@@ -4,62 +4,12 @@
     <TITLE>warp browser</TITLE>
     <link rel="icon" type="image/png" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" >
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script src="https://unpkg.com/adawarp@latest/dist/adawarp.js"></script>
-    <script src="js/text2speech.js"></script>
-    <script src="js/device_manager.js"></script>
-    <script src="js/phrases_ja.js"></script>
-    <script src="js/phrases_en.js"></script>
-    <script src="js/phrases_cn.js"></script>
-    <script src="js/main.js"></script>
+    <script src="bundle.js"></script>
   </HEAD>
 <BODY>
   <img src="assets/images/yellowLine.png" width="100%"/>
   <H1>warp-os-mac</H1>
-  <hr>
-  <div>
-    <input type="text" placeholder="Input partner ID" id="partner-id-input">
-    <button id="start_call_button">Start Call</button>
-    <button id="end_call_button">End Call</button>
-  </div>
-
-  <div>
-    <p>MyID: <span id="my_id">-</span></p>
-    <p>PartnerID: <span id="partner_id">-</span></p>
-  </div>
-  <div>
-    <video id="local_video" autoplay muted></video>
-    <video id="remote_video" style="width : 300px" autoplay></video>
-  </div>
-  <div id="controller"></div>
-
-  <hr>
-  <button id='on_btn'>LedOn</button>
-  <button id='blink_btn'>LedBlink</button>
-  <button id='off_btn'>LedOff</button>
-  <div>
-    <label for="fader">servo_yaw</label>
-    <input type="range" min="30" max="150" value="90" id="yaw_slider" data-servo="yaw" step="1">
-    <output for="fader" id="yaw">90</output>
-  </div>
-  <div>
-    <label for="fader">servo_right</label>
-    <input type="range" min="30" max="150" value="90" id="right_slider" data-servo="right" step="1">
-    <output for="fader" id="right">90</output>
-  </div>
-  <div>
-    <label for="fader">servo_left</label>
-    <input type="range" min="30" max="150" value="90" id="left_slider" data-servo="left" step="1">
-    <output for="fader" id="left">90</output>
-  </div>
-  <hr>
-  <img src="assets/images/yellowLine.png" width="100%"/>
-  <H1>しつもんにこたえるよ！</H1>
-  <form name="setting">
-    <select id="language-list" name="language"></select>
-  </form>
-  <div id="question-list"></div>
-  <hr>
+  <div id="mount-point"></div>
   <img src="assets/images/adawarp-logo-300.png" style="width : 50px">
 </BODY>
 </HTML>

@@ -4,6 +4,15 @@ module.exports = {
     'es6': true,
     'node': true
   },
+  'parserOptions': {
+    'sourceType': 'module',
+    'ecmaFeatures': {
+      'jsx': true
+    }
+  },
+  'plugins': [
+    'react'
+  ],
   'extends': 'eslint:recommended',
   'rules': {
     'indent': [
@@ -94,7 +103,13 @@ module.exports = {
       'warn'
     ],
     'no-undef': [
-      'warn'
+      'error'
+    ],
+    'no-unused-vars': [
+      'error'
+    ],
+    'react/jsx-uses-vars': [
+      'error'
     ],
     'no-useless-return': [
       'error'

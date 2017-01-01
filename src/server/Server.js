@@ -29,6 +29,20 @@ class Server {
     this.io.sockets.on('connection', (socket) => {
       debug('client connected');
 
+      socket.on('command', (command) => {
+        debug(command);
+        switch(command.type) {
+          case 'LED':
+            this.board.changeLedStatus(command.status);
+            break;
+          case 'servo':
+            this.board.servoMove(command.servo, command.angle);
+            break;
+          default:
+            debug("Invalid commnad received ", command);
+        }
+      });
+
       socket.on('ledStatus', (status) => {
         this.board.changeLedStatus(status);
       });

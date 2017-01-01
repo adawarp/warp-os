@@ -1,8 +1,4 @@
-if (!('Languages' in window)) {
-  window.Languages = {};
-}
-
-window.Languages['ja'] = {
+const Phrase = {
   code: 'ja-JP',
   name: '日本語',
   dict: {
@@ -60,3 +56,4 @@ window.Languages['ja'] = {
     }
   }
 };
+export default Phrase;

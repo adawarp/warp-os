@@ -1,8 +1,4 @@
-if (!('Languages' in window)) {
-  window.Languages = {};
-}
-
-window.Languages['cn'] = {
+const Phrases = {
   code: 'zh-CN',
   name: '中文',
   dict: {
@@ -20,3 +16,5 @@ window.Languages['cn'] = {
     }
   }
 };
+
+export default Phrases;
